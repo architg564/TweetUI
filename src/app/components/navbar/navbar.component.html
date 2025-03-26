@@ -1,0 +1,19 @@
+<mat-toolbar style="background-color: #ffd9e1">
+    <h1>Tweet</h1>
+
+    <button *ngIf="LoggedIn" mat-button color="primary" style="margin-left: 50px" routerLink="/home">
+        Home
+    </button>
+
+    <button *ngIf="LoggedIn" mat-button color="primary" style="margin-left: 50px" routerLink="/show-users">
+        All-Users
+    </button>
+
+    <button *ngIf="LoggedIn" mat-button color="primary" style="margin-left: 50px" routerLink="/postTweet">
+        Post Tweet
+    </button>
+
+    <span class="example-spacer"></span>
+
+    <button *ngIf="LoggedIn" mat-button color="primary" (click)="logoutUser()">Logout</button>
+</mat-toolbar>

@@ -1,0 +1,17 @@
+<div class="bootstrap-wrapper">
+    <div class="container mt text-center">
+        <h1 class="color text-center" style="margin-bottom: 50px;"><strong>Write Your Tweet</strong></h1>
+        <form (ngSubmit)="postTweet()" class="example-form">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Leave a comment</mat-label>
+                <!-- <textarea matInput placeholder="Ex. It makes me feel..."></textarea> -->
+                <textarea matInput [(ngModel)]="tweet.message" name="msg" #message maxlength="256" rows="10"
+                    required></textarea>
+                <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+            </mat-form-field>
+            <!-- <textarea [(ngModel)]="tweet.message" name="msg" cols="60" rows="5"></textarea> -->
+            <button mat-raised-button style="margin-top: 50px; background-color: teal; color:antiquewhite"
+                type="submit">Post Tweet</button>
+        </form>
+    </div>
+</div>

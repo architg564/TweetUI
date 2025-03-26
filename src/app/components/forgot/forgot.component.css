@@ -1,0 +1,11 @@
+mat-form-field {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.forgot-card {
+    width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+}

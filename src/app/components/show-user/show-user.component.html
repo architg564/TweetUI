@@ -1,0 +1,86 @@
+<div class="bootstrap-wrapper">
+  <div class="container">
+    <mat-form-field class="col-md-12" style="margin-top: 25px;" appearance="fill">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+    </mat-form-field>
+
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> username </th>
+          <td mat-cell *matCellDef="let row"> {{row.username}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="tweets">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> tweets </th>
+          <td mat-cell *matCellDef="let row"><button mat-button color="primary" (click)="getDetails(row.username)">Load
+            </button></td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="bootstrap-wrapper">
+      <div class="container text-center">
+        <h3>Users</h3>
+        <table mat-table class="mat-elevation-z8" style="margin-left: auto; margin-right: auto;">
+          <thead>
+            <tr>
+              <th mat-header-cell>#</th>
+              <th mat-header-cell>Username</th>
+              <th mat-header-cell>View Tweets</th>
+            </tr>
+          </thead>
+          
+          <tbody *ngFor="let names of userModel; index as i">
+            <tr>
+              <td mat-cell scope="row">{{i+1}}</td>
+              <td mat-cell>{{names.username}}</td>
+              <td mat-cell>
+                <button (click)="getDetails(names.username)">Load</button>
+              </td>          
+            </tr>
+          </tbody>
+        </table>
+        <div *ngIf="noUsersToDisplay" class="row text-center">
+          <h3 class="col-12">No users to display!!</h3>
+        </div>
+    </div>
+    </div> -->

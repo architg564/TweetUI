@@ -1,0 +1,145 @@
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#753333"
+  type="square-jelly-box"
+  [fullScreen]="true"
+  ><p style="color: white">Loading...</p></ngx-spinner
+>
+
+<mat-card class="forgot-card">
+  <mat-card-header>
+    <mat-card-title><strong>Forgot Password</strong></mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form (ngSubmit)="onSubmit()" [formGroup]="credentials">
+      <mat-form-field appearance="outline">
+        <mat-label> Enter username </mat-label>
+        <input formControlName="userId" name="userId" matInput type="text" />
+        <mat-error
+          *ngIf="userId!.hasError('email') && !userId!.hasError('required')"
+        >
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="userId!.hasError('required')"
+          >username required</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label> Enter number </mat-label>
+        <input formControlName="number" name="number" matInput type="number" />
+        <mat-error
+          *ngIf="
+            (number!.hasError('min') || number!.hasError('max')) &&
+            !number!.hasError('required')
+          "
+          >number is of 10 digits</mat-error
+        >
+        <mat-error *ngIf="number!.hasError('required')"
+          >number required</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label> Enter old password </mat-label>
+        <input
+          formControlName="old_password"
+          matInput
+          [type]="hide ? 'password' : 'text'"
+        />
+        <button
+          type="button"
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+        >
+          <mat-icon>{{ hide ? "visibility" : "visibility_off" }}</mat-icon>
+        </button>
+        <mat-error *ngIf="password!.hasError('required')"
+          >old password required</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label> Enter new password </mat-label>
+        <input
+          formControlName="password"
+          matInput
+          [type]="hide2 ? 'password' : 'text'"
+        />
+        <button
+          type="button"
+          mat-icon-button
+          matSuffix
+          (click)="hide2 = !hide2"
+          [attr.aria-label]="'Hide password'"
+        >
+          <mat-icon>{{ hide2 ? "visibility" : "visibility_off" }}</mat-icon>
+        </button>
+        <mat-error
+          *ngIf="
+            (password!.hasError('minlength') ||
+              password!.hasError('maxlength')) &&
+            !password!.hasError('required')
+          "
+        >
+          Please enter stronger password
+        </mat-error>
+        <mat-error *ngIf="password!.hasError('required')"
+          >password required</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label> Re-enter password </mat-label>
+        <input
+          formControlName="confirmPassword"
+          matInput
+          [type]="hide3 ? 'password' : 'text'"
+        />
+        <button
+          type="button"
+          mat-icon-button
+          matSuffix
+          (click)="hide3 = !hide3"
+          [attr.aria-label]="'Hide password'"
+        >
+          <mat-icon>{{ hide3 ? "visibility" : "visibility_off" }}</mat-icon>
+        </button>
+        <mat-error
+          *ngIf="
+            (password!.hasError('minlength') ||
+              password!.hasError('maxlength')) &&
+            !password!.hasError('required')
+          "
+        >
+          Please enter stronger password
+        </mat-error>
+        <mat-error *ngIf="confirmPassword!.hasError('required')"
+          >password required</mat-error
+        >
+        <!-- <mat-error *ngIf="passwordMismatch()">Password missmatch</mat-error> -->
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        style="margin-top: 15px; width: 50%"
+        [disabled]="!credentials.valid"
+      >
+        Update
+      </button>
+    </form>
+    <div style="margin-top: 25px">
+      Remember Credentials?<a [routerLink]="['/']" style="text-decoration: none"
+        >Login</a
+      >
+    </div>
+    <div style="margin-top: 10px">
+      Don't have an account?
+      <a [routerLink]="['/register']" style="text-decoration: none">Register</a>
+    </div>
+  </mat-card-content>
+</mat-card>

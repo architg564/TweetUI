@@ -1,0 +1,60 @@
+<div style="width: 60%" class="mx-auto text-center">
+  <h1 class="welcome-title">
+    Welcome to <strong>{{ username }}</strong>'s tweets
+  </h1>
+
+  <div *ngFor="let tweet of tweets" class="tweet-container">
+    <mat-card class="tweet-card">
+      
+        <mat-card-header>
+        <div mat-card-avatar>
+          <mat-icon>account_circle</mat-icon>
+        </div>
+        <mat-card-title class="tweet-username">{{
+          tweet.username
+        }}</mat-card-title>
+        <mat-card-subtitle class="tweet-time">{{
+          tweet.time
+        }}</mat-card-subtitle>
+      </mat-card-header>
+      
+      
+      <mat-card-content>
+        <p class="tweet-message">{{ tweet.message }}</p>
+      </mat-card-content>
+
+      <mat-card-actions class="tweet-actions">
+        <button mat-icon-button (click)="like(tweet.tweetId)">
+            <mat-icon class="like-icon">{{
+              tweet.likes.includes(username) ? "favorite" : "favorite_border"
+            }}</mat-icon>
+          </button>
+          <span class="like-count"
+            >{{ tweet.likes.length }}
+            {{ tweet.likes.length === 1 ? "Like" : "Likes" }}</span
+          >
+        <button
+          mat-icon-button
+          (click)="replyTweet(tweet.tweetId, tweet.username)"
+        >
+          <mat-icon class="action-icon">comment</mat-icon>
+        </button>
+      </mat-card-actions>
+
+      <mat-divider></mat-divider>
+      <div class="comments-section">
+        <h3 class="comments-title">Comments</h3>
+        <div *ngIf="tweet.comments.length === 0" class="no-comments">
+          No comments yet. Be the first to comment!
+        </div>
+        <div *ngFor="let comment of tweet.comments" class="comment">
+          <strong class="comment-username">{{ comment.username }}</strong
+          >: {{ comment.comment }}
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  <div *ngIf="tweets?.length === 0">
+    <h1 class="no-tweets-message">{{username}} has not posted anything yet!</h1>
+  </div>
+</div>

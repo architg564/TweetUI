@@ -1,0 +1,102 @@
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#753333"
+  type="square-jelly-box"
+  [fullScreen]="true"
+  ><p style="color: white">Loading...</p></ngx-spinner
+>
+
+<mat-card class="register-card">
+  <mat-card-header>
+    <mat-card-title><strong>Register</strong></mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form (ngSubmit)="onSubmit()" [formGroup]="credentials">
+      <mat-form-field appearance="outline">
+        <mat-label> Enter firstname </mat-label>
+        <input formControlName="firstName" required matInput type="text" />
+        <mat-error *ngIf="firstName!.hasError('required')"
+          >First Name required</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label> Enter lastname </mat-label>
+        <input formControlName="lastName" required matInput type="text" />
+        <mat-error *ngIf="lastName!.hasError('required')"
+          >Last Name required</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label> Enter mail </mat-label>
+        <input formControlName="username" required matInput type="text" />
+        <mat-error *ngIf="username!.hasError('required')"
+          >User Name required</mat-error
+        >
+        <mat-error *ngIf="username!.hasError('email')"
+          >Enter valid Email</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label> Enter password </mat-label>
+        <input
+          formControlName="password"
+          required
+          matInput
+          [type]="hide ? 'password' : 'text'"
+        />
+        <button
+          type="button"
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+        >
+          <mat-icon>{{ hide ? "visibility" : "visibility_off" }}</mat-icon>
+        </button>
+        <mat-error *ngIf="password!.hasError('required')"
+          >Password required</mat-error
+        >
+        <mat-error
+          *ngIf="
+            password!.hasError('minlength') || password!.hasError('maxlength')
+          "
+          >Enter Stronger Password
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label> Enter mobile number </mat-label>
+        <input formControlName="number" required matInput type="number" />
+        <!-- <mat-error *ngIf="number!.hasError('pattern') && !number!.hasError('required')">number should not start with 0</mat-error> -->
+        <mat-error
+          *ngIf="
+            (number!.hasError('min') || number!.hasError('max')) &&
+            !number!.hasError('required')
+          "
+          >number is of 10 digits</mat-error
+        >
+        <mat-error *ngIf="number!.hasError('required')"
+          >Number required</mat-error
+        >
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        style="width: 50%; margin-top: 20px"
+        [disabled]="!credentials.valid"
+      >
+        register
+      </button>
+    </form>
+    <br />
+
+    Already a user? <button mat-button routerLink="/">Login</button>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,78 @@
+<div style="width: 60%" class="mx-auto text-center">
+  <h1 class="welcome-title">
+    Welcome, <strong>{{ user }}</strong>
+  </h1>
+
+  <div *ngFor="let tweet of tweets" class="tweet-container">
+    <mat-card class="tweet-card">
+      <!-- User Info -->
+      <mat-card-header>
+        <div mat-card-avatar>
+          <mat-icon>account_circle</mat-icon>
+        </div>
+        <mat-card-title class="tweet-username">{{
+          tweet.username
+        }}</mat-card-title>
+        <mat-card-subtitle class="tweet-time">{{
+          tweet.time
+        }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <!-- Tweet Content -->
+      <mat-card-content>
+        <p class="tweet-message">{{ tweet.message }}</p>
+      </mat-card-content>
+
+      <!-- Actions -->
+      <mat-card-actions align="start" class="tweet-actions">
+        <button mat-icon-button (click)="like(tweet.tweetId)">
+          <mat-icon class="like-icon">{{
+            tweet.likes.includes(user) ? "favorite" : "favorite_border"
+          }}</mat-icon>
+        </button>
+        <span class="like-count"
+          >{{ tweet.likes.length }}
+          {{ tweet.likes.length === 1 ? "Like" : "Likes" }}</span
+        >
+
+        <button
+          mat-icon-button
+          (click)="replyTweet(tweet.tweetId, tweet.username)"
+        >
+          <mat-icon class="action-icon">comment</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          (click)="updateTweet(tweet.tweetId, tweet.username)"
+        >
+          <mat-icon class="action-icon">edit</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="warn"
+          (click)="delete(tweet.tweetId, tweet.username)"
+        >
+          <mat-icon class="delete-icon">delete</mat-icon>
+        </button>
+      </mat-card-actions>
+
+      <!-- Comments Section -->
+      <mat-divider></mat-divider>
+      <div class="comments-section">
+        <h3 class="comments-title">Comments</h3>
+        <div *ngIf="tweet.comments.length === 0" class="no-comments">
+          No comments yet. Be the first to comment!
+        </div>
+        <div *ngFor="let comment of tweet.comments" class="comment">
+          <strong class="comment-username">{{ comment.username }}</strong
+          >: {{ comment.comment }}
+        </div>
+      </div>
+    </mat-card>
+  </div>
+
+  <!-- No Tweets Message -->
+  <div *ngIf="tweets?.length === 0">
+    <h1 class="no-tweets-message">No Tweets yet! Post the first one!</h1>
+  </div>
+</div>
