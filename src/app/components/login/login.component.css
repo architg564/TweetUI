@@ -3,9 +3,31 @@ mat-form-field {
     margin-top: 15px;
 }
 
+/* Container wrapping the login card and attention note */
+.login-container {
+  position: relative;
+}
+
+/* Login card remains unchanged */
 .login-card {
-    width: 600px;
-    margin: 100px auto;
-    padding: 20px;
-    text-align: center;
+  width: 600px;
+  margin: 100px auto;  /* center the login card */
+  padding: 20px;
+  text-align: center;
+}
+
+/* Attention note is absolutely positioned at the top right of the container */
+.attention-note {
+  width: 20%;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #ffe6e6;
+  border: 2px solid #ff0000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.attention-note mat-card-title {
+  color: #cc0000;
+  font-weight: bold;
 }

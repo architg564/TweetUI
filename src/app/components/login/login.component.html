@@ -6,36 +6,36 @@
   [fullScreen]="true"
   ><p style="color: white">Loading...</p></ngx-spinner
 >
-
+<div class="login-container">
 <mat-card class="login-card">
   <mat-card-header>
     <mat-card-title><strong>Login</strong></mat-card-title>
   </mat-card-header>
-
+  
   <mat-card-content>
     <form [formGroup]="credentials" (ngSubmit)="onSubmit()">
-
+      
       <mat-form-field appearance="outline" >
         <mat-label> Enter mail </mat-label>
         <input formControlName="username" id="username" matInput type="text"  />
         <mat-error
-          *ngIf="username!.hasError('email') && !username!.hasError('required')"
+        *ngIf="username!.hasError('email') && !username!.hasError('required')"
         >
-          Please enter a valid email address
-        </mat-error>
-        <mat-error *ngIf="username!.hasError('required')">
-          Email is <strong>required</strong>
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label> Enter password </mat-label>
-        <input
-          formControlName="password"
-          name="password"
-          matInput
-          [type]="hide ? 'password' : 'text'"
-        />
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="username!.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline">
+      <mat-label> Enter password </mat-label>
+      <input
+      formControlName="password"
+      name="password"
+      matInput
+      [type]="hide ? 'password' : 'text'"
+      />
         <button
           type="button"
           mat-icon-button
@@ -43,41 +43,60 @@
           (click)="hide = !hide"
           [attr.aria-label]="'Hide password'"
           
-        >
+          >
           <mat-icon>{{ hide ? "visibility" : "visibility_off" }}</mat-icon>
         </button>
         <mat-error
-          *ngIf="
+        *ngIf="
             password!.hasError('minlength') && !password!.hasError('required')
           "
         >
-          Please enter stronger password
-        </mat-error>
-        <mat-error *ngIf="password!.hasError('required')">
-          password is <strong>required</strong>
+        Please enter stronger password
+      </mat-error>
+      <mat-error *ngIf="password!.hasError('required')">
+        password is <strong>required</strong>
         </mat-error>
       </mat-form-field>
-
+      
       <button
-        mat-raised-button
-        style="width: 50%"
-        type="submit"
-        [disabled]="!credentials.valid"
+      mat-raised-button
+      style="width: 50%"
+      type="submit"
+      [disabled]="!credentials.valid"
       >
-        login
-      </button>
-
-      <div>
-        <a routerLink="/forgot" style="text-decoration: none"
-          >Forgot Password ?</a
-        >
-      </div>
-    </form>
-
-    <div style="margin-top: 15px">
-      Don't have an account?<button mat-button routerLink="/register">
-        Register
-      </button>
+      login
+    </button>
+    
+    <div>
+      <a routerLink="/forgot" style="text-decoration: none"
+      >Forgot Password ?</a
+      >
     </div>
+  </form>
+  
+  <div style="margin-top: 15px">
+    Don't have an account?<button mat-button routerLink="/register">
+      Register
+    </button>
+  </div>
   </mat-card-content>
 </mat-card>
+  <mat-card class="attention-note">
+    <mat-card-header>
+      <mat-card-title>
+        Important Note
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        For testing purposes, you can use the following sample user details:<br />
+        <strong>Email:</strong> Archit.Gupta&#64;gmail.com<br />
+        <strong>Password:</strong> test&#64;123
+      </p>
+      <p>
+        Please note, the first request(either login/register/forgot) may experience a cold start (3-5 minutes delay),
+        but subsequent requests will load instantly.
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
